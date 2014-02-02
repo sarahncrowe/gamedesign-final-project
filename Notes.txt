@@ -1,0 +1,5 @@
+2 FEBRUARY 2014
+
+> Created background for the room
+	> Sprite for the boy was too small compared to the room
+	> Problems with scaling
