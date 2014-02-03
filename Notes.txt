@@ -1,5 +1,24 @@
+23 JANUARY 2014
+
+> Created first Game Sprite
+	> Got the right blend of cute & creepy
+	> Allowed for some pixel art practice
+	
+> Game Maker tutorial
+	> More comfortable with making a game
+	> Familiar with sprites, rooms, objects, sounds, ect.
+	> Still much to learn. Next: scripting
+	
+
 2 FEBRUARY 2014
 
 > Created background for the room
 	> Sprite for the boy was too small compared to the room
-	> Problems with scaling
+	> Problems with scaling (sprites are all power 2)
+	> Will resize room to fit boy properly
+
+> Creation of music track
+	> Not expecting this to be final music for the game
+	> Allows for modification to more sombre/dark tracks w/ same theme
+	> Allowed me (Matt) to get back into recording
+	
