@@ -21,4 +21,13 @@
 	> Not expecting this to be final music for the game
 	> Allows for modification to more sombre/dark tracks w/ same theme
 	> Allowed me (Matt) to get back into recording
+
+4 FEBRUARY 2014
+
+> "Differential pixel" sprites
+	>Synced to Art Assets branch
+	> Tried to make the art designs look more like traditional sprites rather than MS Paint art.
+	> Proof of concept is solid.
+	> Changed boy sprite from 32x32 to 64x64. This allowed for thinner borderline and more detail
+	> Next: lighting. Made a shawdow sprite, will play with light more.
 	
