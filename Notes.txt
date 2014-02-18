@@ -29,5 +29,22 @@
 	> Tried to make the art designs look more like traditional sprites rather than MS Paint art.
 	> Proof of concept is solid.
 	> Changed boy sprite from 32x32 to 64x64. This allowed for thinner borderline and more detail
-	> Next: lighting. Made a shawdow sprite, will play with light more.
+	> Next: lighting. Made a shadow sprite, will play with light more.
+	
+17 FEBRUARY 2014
+
+> Woo long break. It's been a little while.
+	> I truly wish I could work on this all time instead of doing Assembly all the time.
+	
+> Started actually adding assets to the project.
+	> Wondering if we should scale the sprites again
+	> May not be working with the most recent sprites
+		> They seem different from last I saw
+		> No matter, that's not really important at the moment.
+	
+> Researched dialogues and how to add them to the game.
+	> At the moment, I'm going with a separate box at the bottom for dialogue
+	> Thinking about doing a pop-up over the room, but I don't think there's enough space
+	> So many Youtube tutorials and forums that end up helping nothing. Ugh.
+	> A few that helped! Yay!
 	
