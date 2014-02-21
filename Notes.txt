@@ -22,6 +22,7 @@
 	> Allows for modification to more sombre/dark tracks w/ same theme
 	> Allowed me (Matt) to get back into recording
 
+	
 4 FEBRUARY 2014
 
 > "Differential pixel" sprites
@@ -30,6 +31,7 @@
 	> Proof of concept is solid.
 	> Changed boy sprite from 32x32 to 64x64. This allowed for thinner borderline and more detail
 	> Next: lighting. Made a shadow sprite, will play with light more.
+	
 	
 17 FEBRUARY 2014
 
@@ -41,6 +43,7 @@
 	> May not be working with the most recent sprites
 		> They seem different from last I saw
 		> No matter, that's not really important at the moment.
+		> I assume this is either due to not being committed or my inexperience with git.
 	
 > Researched dialogues and how to add them to the game.
 	> At the moment, I'm going with a separate box at the bottom for dialogue
@@ -48,3 +51,31 @@
 	> So many Youtube tutorials and forums that end up helping nothing. Ugh.
 	> A few that helped! Yay!
 	
+	
+20 FEBRUARY 2014
+
+> Found a dialogue engine that does exactly what I need to do
+	> I have no idea how to use it.
+	> Not sure if I'm wasting time by trying to figure it out
+	> update: yes, I was wasting time. free version restrictions. see below.
+
+> Ended up choosing a simpler engine that was easier to decipher.
+	> Game Maker Language is not easily mastered in mere hours.
+	> The free version does not have the same resources as paid versions
+		> Means I can't just pick any engine off the internet and simply throw it into the game
+		> Resources include some functions that provide greater efficiency/usability/ect.
+	> I'm seriously struggling with this though.
+		> The initial tutorials were pretty easy, but I think they're user written
+			> Writing style seems different for each and instructions aren't 100% consistent.
+		> Beginning to doubt that this is going to come together
+			> Of course, I say that past my bedtime and after I've been working on it (read: frustrated) most of the day
+			> I'm sure going to bed will provide some much needed perspective
+
+> Have the dialogue of the first scene coded.
+	> I'm not entirely sure that I'm using the best method, but it's all I know how to do right now
+	> As far as I can tell, not going completely in the wrong direction. Just a little misguided.
+
+> Next is to fix the room (not using a view) and add in player dialogue choices.
+
+> My game maker folder is really messy with all the engines and tutorials I downloaded
+	> Have to clean it up, just don't want to delete something that might be important.
