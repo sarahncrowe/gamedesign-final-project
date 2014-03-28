@@ -83,6 +83,8 @@ public class Gametest {
 		
 		int choiceReturn;
 		
+		Visual_Outline gameWindow = new Visual_Outline(); 
+		
 		scene_one();
 		choiceReturn = scene_two();
 		//only scene_3a OR scene_3b depending on responses chosen in scene 2
