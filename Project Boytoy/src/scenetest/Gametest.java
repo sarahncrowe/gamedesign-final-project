@@ -82,8 +82,7 @@ public class Gametest {
 	public static void main(String[] args) {
 		
 		int choiceReturn;
-		
-		Visual_Outline gameWindow = new Visual_Outline(); 
+		 
 		
 		scene_one();
 		choiceReturn = scene_two();

@@ -15,7 +15,9 @@ public class gameWindow extends JFrame implements ActionListener {
 	private JRadioButton choice2 = new JRadioButton();
 	private JRadioButton choice3 = new JRadioButton();
 	private JRadioButton choice4 = new JRadioButton();
-	private JButton reply = new JButton("Reply");
+	private static JButton next = new JButton("Next");
+	private static boolean pause;
+	
 	
 	
 	
@@ -25,7 +27,6 @@ public class gameWindow extends JFrame implements ActionListener {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////	CONTAINER AND PANEL CODE STARTS HERE	///////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	
 	
 	//Layout and Panel info
@@ -50,6 +51,10 @@ public class gameWindow extends JFrame implements ActionListener {
 		choices.add(choice2);
 		choices.add(choice3);
 		choices.add(choice4);
+		choice1.addActionListener(this);
+		choice2.addActionListener(this);
+		choice3.addActionListener(this);
+		choice4.addActionListener(this);
 		//add buttons to GUI
 		p2.add(choice1);
 		p2.add(choice2);
@@ -61,7 +66,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		//Panel 3
 		Panel p3 = new Panel();
 		p3.setLayout(new FlowLayout());
-		p3.add(reply);
+		next.addActionListener(this);
+		p3.add(next);
 		
 		//set layout
 		cp.setLayout(new BorderLayout());
@@ -82,12 +88,11 @@ public class gameWindow extends JFrame implements ActionListener {
 
 	
 	public void actionPerformed(ActionEvent e) {
-		
-		
+
+		if (e.getSource() == next){
+			pause = false;
+		}
 	}
-	
-	
-	
 	
 	
 	
@@ -98,6 +103,8 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	
 	public static void typewriter(String dialogue){
+		pause = true;
+		next.setEnabled(false);
 		
 		//displays string letter by letter (typewriter effect)
 		for (int i=0; i<dialogue.length(); i++){
@@ -105,22 +112,24 @@ public class gameWindow extends JFrame implements ActionListener {
 			
 			//try and catch for Thread.sleep, just in case there are errors.
 			try {
-				Thread.sleep(75);
+				Thread.sleep(60);
 			} catch (InterruptedException e) {
 				
 				System.out.println("Something went wrong in the sentence.");
 			}
 		}
 		
-		//one more try and catch for the after sentence pause
-		//CHANGE TO CLICK "NEXT" BUTTON FOR NEXT LINE
-		try {
-			Thread.sleep(800);
-		} catch (InterruptedException e) {
-			
-			System.out.println("Something went wrong between sentences.");
-		}
+		//enables next button again to proceed with dialogue
+		next.setEnabled(true);
 		
+		//sleeps, checks if it needs to be paused and sleeps again if true
+		while (pause == true){
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				System.out.println("Loop sleep went wrong");
+			}
+		}
 		//newline for splitting up sentences
 		display.append("\n");
 	}
@@ -131,8 +140,6 @@ public class gameWindow extends JFrame implements ActionListener {
 		//clears text area for new scene
 		display.setText("");
 	}
-	
-	
 	
 	
 	
