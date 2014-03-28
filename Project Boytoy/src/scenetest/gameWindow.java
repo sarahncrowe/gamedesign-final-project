@@ -239,7 +239,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		int returnedValue;
 		
-		JFrame frame = new Visual_Outline();
+		JFrame frame = new gameWindow();
 		frame.pack();
 		frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
