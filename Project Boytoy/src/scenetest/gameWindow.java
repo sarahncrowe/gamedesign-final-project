@@ -401,11 +401,19 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		newScene();
 		
+		changePicture("Scene2-1.png");
+		
+		pause(3000);
+		
 		changePicture("Scene2-2.png");
 		
 		typewriter("Good morning, Teddy!");
+		
 		askQuestion("Good morning, friend!", "Hi.");
+		
+		changePicture("Scene2-3.png");
 		typewriter("Ha! I knew you could talk!");
+		
 		askQuestion("You're my friend. Of course I'll talk to you.", "You kept talking to me, I figured I should reply");
 		
 		if (choice1.isSelected()){
@@ -428,8 +436,9 @@ public class gameWindow extends JFrame implements ActionListener {
 				askQuestion("I'm...shy.", "I'm...not real.");
 				typewriter("Haha, okay Teddy");
 			}
+			changePicture("Scene2-4.png");
 			typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
-			
+			changePicture("Scene2-5.png");
 			return 1;
 		}
 		
@@ -442,9 +451,9 @@ public class gameWindow extends JFrame implements ActionListener {
 			askQuestion("I'm...shy.", "I'm...not real.");
 			typewriter("Haha, okay Teddy");
 		}
-		
+		changePicture("Scene2-4.png");
 		typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
-		
+		changePicture("Scene2-5.png");
 		return 0;
 		}
 	}
