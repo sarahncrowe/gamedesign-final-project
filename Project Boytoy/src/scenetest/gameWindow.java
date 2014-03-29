@@ -201,6 +201,15 @@ public class gameWindow extends JFrame implements ActionListener {
 		picture.setIcon(sceneImage);
 	}
 	
+	public static void pause(int time){
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			System.err.println("Something went wrong in the pause method.");
+		}
+	}
+	
+	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
