@@ -8,21 +8,24 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class gameWindow extends JFrame implements ActionListener {
+	
 
-	//initialize text area, labels for different choices, and button
-	private static JTextArea display = new JTextArea(20, 75);
+	//initialize text area, scroll bar, buttons, radio buttons,
+	// label for picture and boolean variables.
+	private static JTextArea display = new JTextArea(10, 75);
+	private static JScrollPane scroll = new JScrollPane(display, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	private static JButton next = new JButton("Next");
 	private static JButton reply = new JButton("Reply");
+	private static JLabel picture = new JLabel("Picture will go here.");
 	private static boolean pause;
 	private static boolean isQuestion = false;
-	//private static JOptionPane question = new JOptionPane();
 	
 	private static JRadioButton choice1 = new JRadioButton();
 	private static JRadioButton choice2 = new JRadioButton();
 	private static JRadioButton choice3 = new JRadioButton();
 	private static JRadioButton choice4 = new JRadioButton();
 	
-	
+	private static JLabel path;
 	
 	
 	
@@ -54,13 +57,14 @@ public class gameWindow extends JFrame implements ActionListener {
 		Container cp = getContentPane();
 		
 		
-		//Panel 1
+		//Panel 1 --> panel for text area, scrollbar and image.
 		Panel p1 = new Panel();
-		p1.setLayout(new FlowLayout());
-		p1.add(display);
+		p1.setLayout(new BorderLayout());
+		p1.add(picture, BorderLayout.NORTH);
+		p1.add(scroll, BorderLayout.SOUTH);
 		
 		
-		//Panel p2
+		//Panel p2 --> panel for radio buttons
 		Panel p2 = new Panel();
 		p2.setLayout(new GridLayout(4,1));
 		//add buttons to GUI
@@ -70,14 +74,18 @@ public class gameWindow extends JFrame implements ActionListener {
 		p2.add(choice4);
 		
 		
-		
-		//Panel 3
+		//Panel 3 --> panel for reply and next buttons.
 		Panel p3 = new Panel();
 		p3.setLayout(new FlowLayout());
 		next.addActionListener(this);
 		reply.addActionListener(this);
 		p3.add(next);
 		p3.add(reply);
+		
+
+		
+		
+		
 		
 		//set layout
 		cp.setLayout(new BorderLayout());
@@ -117,10 +125,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	public static void typewriter(String dialogue){
 		//reset to defaults
-		pause = true;
-		isQuestion = false;
-		next.setEnabled(false);
-		reply.setEnabled(false);
+		defaultVal();
 		
 		choice1.setVisible(false);
 		choice2.setVisible(false);
@@ -130,6 +135,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		//displays string letter by letter (typewriter effect)
 		for (int i=0; i<dialogue.length(); i++){
 			display.append(dialogue.substring(i, i+1));
+			display.setCaretPosition(display.getDocument().getLength());
 			
 			//try and catch for Thread.sleep, just in case there are errors.
 			try {
@@ -155,14 +161,48 @@ public class gameWindow extends JFrame implements ActionListener {
 		display.append("\n");
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	
+	public static void defaultVal(){
+		/*resets to defaults to ensure that scene carries out correctly
+		 * 
+		 * pause = true				--> ensure the scene pauses to allow user to read it.
+		 * isQuestion = false		--> ensure methods aren't accidentally pausing for reply
+		 * next.setEnabled(false)	--> ensure disabled until needed
+		 * reply.setEnabled(false)	--> ensure disabled until needed
+		 * 
+		 */
+		pause = true;
+		isQuestion = false;
+		next.setEnabled(false);
+		reply.setEnabled(false);
+	}
 	
 	public static void newScene(){
 		//clears text area for new scene
 		display.setText("");
 	}
 	
+	public static void changePicture(String imageName){
+		path.setText("C:\\Users\\Sarah\\Documents\\COSC\\GitHub\\team6\\gameImages\\");
+	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static void askQuestion(String q1){
+		/* 
+		 * player's reply options are set to the respective radio buttons
+		 * and only the needed radio buttons become visible.
+		 * Reply and next buttons are enabled and disabled (respectively)
+		 * and isQuestion is set to true to wait for the user to make
+		 * a selection.
+		 * 
+		 */
+		
 		choice1.setText(q1);
 		choice1.setVisible(true);
 		
@@ -170,7 +210,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		reply.setEnabled(true);
 		next.setEnabled(false);
 		
-		//make sure conversation doesn't move on without a reply
+		//make sure conversation doesn't move on without a reply.
+		//briefly sleeps between checking if isQuestion is still true.
 		while (isQuestion){
 			try {
 				Thread.sleep(50);
@@ -184,6 +225,12 @@ public class gameWindow extends JFrame implements ActionListener {
 	}
 	
 	public static void askQuestion(String q1, String q2){
+		/*
+		 * see public static void askQuestion(String q1) for details on
+		 * how the method works and/or details on what each section does. 
+		 * 
+		 */
+		
 		choice1.setText(q1);
 		choice2.setText(q2);
 		
@@ -194,7 +241,6 @@ public class gameWindow extends JFrame implements ActionListener {
 		reply.setEnabled(true);
 		next.setEnabled(false);
 		
-		//make sure conversation doesn't move on without a reply
 		while (isQuestion){
 			try {
 				Thread.sleep(50);
@@ -202,7 +248,7 @@ public class gameWindow extends JFrame implements ActionListener {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
 			}
 		}
-		//print out player's reply
+
 		if (choice1.isSelected()) {
 			display.append(q1);
 		}
@@ -213,6 +259,12 @@ public class gameWindow extends JFrame implements ActionListener {
 	}
 	
 	public static void askQuestion(String q1, String q2, String q3){
+		/*
+		 * see public static void askQuestion(String q1) for details on
+		 * how the method works and/or details on what each section does. 
+		 * 
+		 */
+		
 		choice1.setText(q1);
 		choice2.setText(q2);
 		choice3.setText(q3);
@@ -225,7 +277,6 @@ public class gameWindow extends JFrame implements ActionListener {
 		reply.setEnabled(true);
 		next.setEnabled(false);
 		
-		//make sure conversation doesn't move on without a reply
 		while (isQuestion){
 			try {
 				Thread.sleep(50);
@@ -233,7 +284,6 @@ public class gameWindow extends JFrame implements ActionListener {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
 			}
 		}
-		//print out player's reply
 		if (choice1.isSelected()) {
 			display.append(q1);
 		}
@@ -247,6 +297,12 @@ public class gameWindow extends JFrame implements ActionListener {
 	}
 	
 	public static void askQuestion(String q1, String q2, String q3, String q4){
+		/*
+		 * see public static void askQuestion(String q1) for details on
+		 * how the method works and/or details on what each section does. 
+		 * 
+		 */
+		
 		choice1.setText(q1);
 		choice2.setText(q2);
 		choice3.setText(q3);
@@ -261,7 +317,6 @@ public class gameWindow extends JFrame implements ActionListener {
 		reply.setEnabled(true);
 		next.setEnabled(false);
 		
-		//make sure conversation doesn't move on without a reply
 		while (isQuestion){
 			try {
 				Thread.sleep(50);
@@ -269,7 +324,6 @@ public class gameWindow extends JFrame implements ActionListener {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
 			}
 		}
-		//print out player's reply
 		if (choice1.isSelected()) {
 			display.append(q1);
 		}
@@ -371,48 +425,66 @@ public class gameWindow extends JFrame implements ActionListener {
 		//occurs when the player advised the boy to "try hard"
 		
 		newScene();
-		
+		askQuestion("Oh no! Are you okay?");
 		typewriter("The other boy wouldn't let me play with him");
+		askQuestion("What happened");
 		typewriter("I pushed him...but he hit me!");
+		askQuestion("Did you hit him back?","That's not how we make friends.");
+		if (choice1.isSelected()){
+			typewriter("No...the teacher pulled me away");
+		}
+		if (choice2.isSelected()){
+			typewriter("I tried really hard though! No one will talk to me now...");
+			askQuestion("The other kids will still like you, but you have to be nice.", "I'll still talk to you.");
+		}
 		
-		//response to "did you hit him back?"
-		typewriter("No...the teacher pulled me away");
-		
-		//response to "that's not how we make friends"
-		typewriter("I tried really hard though! No one will talk to me now...");
-		
-		typewriter("Okay. Mommy is mad at me, and Dad told me to go to bed."
+		typewriter("Mommy is mad at me, and Dad told me to go to bed."
 				+ " I don't want to get in more trouble.");
+		askQuestion("I understand, Goodnight.", "I'm very disappointed. Go to sleep.");
 		typewriter("Good night, Teddy");
 	}
 	
 	public static void scene_3b(){
 		//occurs when the player advises the boy to be himself
 		
-		//clear text area for new scene
 		newScene();
-		
+		askQuestion("What's wrong?", "What's up with you?", "What's your problem?");
 		typewriter("No one played with me. No one wanted to be my friend.");
-		
-		//response to "I'm still your friend"
-		typewriter("But why didn't they play with me?");
-		//response to "Give it time, buddy. The other kids will play with you"
-		typewriter("But how do I make them my friends?");
-		
+		askQuestion("I'm still your friend.", "Give it time, the others will play with you.", "I can see why. No one wants to play with a crybaby.");
+		if (choice1.isSelected()){
+			typewriter("But why didn't they play with me?");
+		}
+		if (choice2.isSelected()){
+			typewriter("But how do I make them my friends?");
+		}
+		if (choice3.isSelected()){
+			typewriter("That's really mean, Teddy");
+			typewriter("But...is that really why they didn't play with me?");
+			
+		}
+		askQuestion("Well, what did you do today?");
 		typewriter("I played alone, that's what I always do. Why didn't they join me?");
 		
-		//response to "It'll take time, kids will come play"
-		typewriter("They will? Okay...");
-		//response to "try saying hi to the others. all kids are shy"
-		typewriter("What if they're mean?");
-		typewriter("Okay...");
-		
+		askQuestion("Give it a couple of days. The other kids will come play.", "Try saying hi to the others. All kids are shy.");
+		if (choice1.isSelected()){
+			typewriter("They will? Okay...");
+		}
+		if (choice2.isSelected()){
+			typewriter("What if they're mean?");
+			askQuestion("Find the good ones.", "Then keep playing alone.");
+			if (choice1.isSelected()){
+				typewriter("Okay, I'll try...");
+			}
+			if (choice2.isSelected()){
+				typewriter("I don't want to do that! I'll try again!");
+			}
+		}
 		typewriter("Mommy wants me to go to bed.");
 		typewriter("Good night, Teddy.");
 		
 	}
 	
-
+	
 	
 	
 	
@@ -428,8 +500,10 @@ public class gameWindow extends JFrame implements ActionListener {
 		JFrame frame = new gameWindow();
 		frame.pack();
 		frame.setVisible(true);
+		frame.setTitle("A Boy and His Bear");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
+	    //call story methods to actually play the game
 	    scene_one();
 	    returnedValue = scene_two();
 	    if (returnedValue == 1){
