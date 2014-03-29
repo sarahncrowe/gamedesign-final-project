@@ -11,12 +11,12 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 
 	//initialize text area, scroll bar, buttons, radio buttons,
-	// label for picture and boolean variables.
+	// label and icon for pictures, and boolean variables.
 	private static JTextArea display = new JTextArea(10, 75);
 	private static JScrollPane scroll = new JScrollPane(display, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	private static JButton next = new JButton("Next");
 	private static JButton reply = new JButton("Reply");
-	private static JLabel picture = new JLabel("Picture will go here.");
+	private static JLabel picture = new JLabel("");
 	private static boolean pause;
 	private static boolean isQuestion = false;
 	
@@ -25,7 +25,8 @@ public class gameWindow extends JFrame implements ActionListener {
 	private static JRadioButton choice3 = new JRadioButton();
 	private static JRadioButton choice4 = new JRadioButton();
 	
-	private static JLabel path;
+	private static ImageIcon sceneImage = new ImageIcon("C:\\Users\\Sarah\\Documents\\COSC\\GitHub\\team6\\gameImages\\");
+	
 	
 	
 	
@@ -39,6 +40,8 @@ public class gameWindow extends JFrame implements ActionListener {
 	public gameWindow() {
 		//make sure players can't type in the text area
 		display.setEditable(false);
+		display.setLineWrap(true);
+		display.setWrapStyleWord(true);
 		
 		//add buttons to group, add actionListeners
 		ButtonGroup choices = new ButtonGroup();
@@ -58,14 +61,16 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		
 		//Panel 1 --> panel for text area, scrollbar and image.
-		Panel p1 = new Panel();
+		JPanel p1 = new JPanel();
 		p1.setLayout(new BorderLayout());
 		p1.add(picture, BorderLayout.NORTH);
+		//p1.setPreferredSize(512,200);
 		p1.add(scroll, BorderLayout.SOUTH);
+		p1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		
 		//Panel p2 --> panel for radio buttons
-		Panel p2 = new Panel();
+		JPanel p2 = new JPanel();
 		p2.setLayout(new GridLayout(4,1));
 		//add buttons to GUI
 		p2.add(choice1);
@@ -75,7 +80,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		
 		//Panel 3 --> panel for reply and next buttons.
-		Panel p3 = new Panel();
+		JPanel p3 = new JPanel();
 		p3.setLayout(new FlowLayout());
 		next.addActionListener(this);
 		reply.addActionListener(this);
@@ -132,6 +137,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		choice3.setVisible(false);
 		choice4.setVisible(false);
 		
+		display.append(" ");
+		
 		//displays string letter by letter (typewriter effect)
 		for (int i=0; i<dialogue.length(); i++){
 			display.append(dialogue.substring(i, i+1));
@@ -186,7 +193,12 @@ public class gameWindow extends JFrame implements ActionListener {
 	}
 	
 	public static void changePicture(String imageName){
-		path.setText("C:\\Users\\Sarah\\Documents\\COSC\\GitHub\\team6\\gameImages\\");
+		// appends image name to path to retrieve picture,
+		// and sets as icon on picture JLabel
+		
+		String path = "C:\\Users\\Sarah\\Documents\\COSC\\GitHub\\team6\\gameImages\\" + imageName;
+		sceneImage = new ImageIcon(path);
+		picture.setIcon(sceneImage);
 	}
 	
 	
@@ -347,6 +359,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	
 	public static void scene_one(){
+		changePicture("Scene1-1.png");
 		typewriter("Hello?");
 		typewriter("Hellooo?");
 		typewriter("I'm going to name you...Teddy.");
@@ -368,6 +381,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		typewriter("I have to go to bed. Think about it, okay?");
 		
+		changePicture("Scene1-3.png");
+		
 		askQuestion("Goodnight, friend.", "See you in the morning.");
 	}
 	
@@ -375,6 +390,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		newScene();
 		
+		changePicture("Scene2-2.png");
 		typewriter("Good morning, Teddy!");
 		askQuestion("Good morning, friend!", "Hi.");
 		typewriter("Ha! I knew you could talk!");
@@ -501,6 +517,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setTitle("A Boy and His Bear");
+		frame.setSize(530, 575);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    //call story methods to actually play the game
