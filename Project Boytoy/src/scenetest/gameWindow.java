@@ -25,7 +25,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	private static JRadioButton choice3 = new JRadioButton();
 	private static JRadioButton choice4 = new JRadioButton();
 	
-	private static ImageIcon sceneImage = new ImageIcon("C:\\Users\\Sarah\\Documents\\COSC\\GitHub\\team6\\gameImages\\");
+	private static ImageIcon sceneImage;
 	
 	
 	
@@ -196,8 +196,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		// appends image name to path to retrieve picture,
 		// and sets as icon on picture JLabel
 		
-		String path = "C:\\Users\\Sarah\\Documents\\COSC\\GitHub\\team6\\gameImages\\" + imageName;
-		sceneImage = new ImageIcon(path);
+		
+		sceneImage = new ImageIcon(gameWindow.class.getResource("/resources/images/"+imageName));
 		picture.setIcon(sceneImage);
 	}
 	
@@ -379,6 +379,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		askQuestion("...");
 		
+		changePicture("Scene1-2.png");
+		
 		typewriter("I have to go to bed. Think about it, okay?");
 		
 		changePicture("Scene1-3.png");
@@ -391,6 +393,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		newScene();
 		
 		changePicture("Scene2-2.png");
+		
 		typewriter("Good morning, Teddy!");
 		askQuestion("Good morning, friend!", "Hi.");
 		typewriter("Ha! I knew you could talk!");
