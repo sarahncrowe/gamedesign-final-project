@@ -11,13 +11,16 @@ public class gameWindow extends JFrame implements ActionListener {
 
 	//initialize text area, labels for different choices, and button
 	private static JTextArea display = new JTextArea(20, 75);
-	private JRadioButton choice1 = new JRadioButton();
-	private JRadioButton choice2 = new JRadioButton();
-	private JRadioButton choice3 = new JRadioButton();
-	private JRadioButton choice4 = new JRadioButton();
 	private static JButton next = new JButton("Next");
+	private static JButton reply = new JButton("Reply");
 	private static boolean pause;
+	private static boolean isQuestion = false;
+	//private static JOptionPane question = new JOptionPane();
 	
+	private static JRadioButton choice1 = new JRadioButton();
+	private static JRadioButton choice2 = new JRadioButton();
+	private static JRadioButton choice3 = new JRadioButton();
+	private static JRadioButton choice4 = new JRadioButton();
 	
 	
 	
@@ -31,10 +34,25 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	//Layout and Panel info
 	public gameWindow() {
+		//make sure players can't type in the text area
 		display.setEditable(false);
+		
+		//add buttons to group, add actionListeners
+		ButtonGroup choices = new ButtonGroup();
+		choices.add(choice1);
+		choices.add(choice2);
+		choices.add(choice3);
+		choices.add(choice4);
+		choice1.addActionListener(this);
+		choice2.addActionListener(this);
+		choice3.addActionListener(this);
+		choice4.addActionListener(this);
+		
+		
 		
 		//Initialize Container
 		Container cp = getContentPane();
+		
 		
 		//Panel 1
 		Panel p1 = new Panel();
@@ -45,16 +63,6 @@ public class gameWindow extends JFrame implements ActionListener {
 		//Panel p2
 		Panel p2 = new Panel();
 		p2.setLayout(new GridLayout(4,1));
-		//add buttons to group
-		ButtonGroup choices = new ButtonGroup();
-		choices.add(choice1);
-		choices.add(choice2);
-		choices.add(choice3);
-		choices.add(choice4);
-		choice1.addActionListener(this);
-		choice2.addActionListener(this);
-		choice3.addActionListener(this);
-		choice4.addActionListener(this);
 		//add buttons to GUI
 		p2.add(choice1);
 		p2.add(choice2);
@@ -67,7 +75,9 @@ public class gameWindow extends JFrame implements ActionListener {
 		Panel p3 = new Panel();
 		p3.setLayout(new FlowLayout());
 		next.addActionListener(this);
+		reply.addActionListener(this);
 		p3.add(next);
+		p3.add(reply);
 		
 		//set layout
 		cp.setLayout(new BorderLayout());
@@ -92,19 +102,30 @@ public class gameWindow extends JFrame implements ActionListener {
 		if (e.getSource() == next){
 			pause = false;
 		}
+		if (e.getSource() == reply){
+			isQuestion = false;
+		}
 	}
 	
 	
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////  END OF GUI. MISCELLANEOUS METHODS BELOW.	///////////////////////////////
+	////////////////////  END OF ACTIONLISTENER. MISCELLANEOUS METHODS BELOW.	///////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	public static void typewriter(String dialogue){
+		//reset to defaults
 		pause = true;
+		isQuestion = false;
 		next.setEnabled(false);
+		reply.setEnabled(false);
+		
+		choice1.setVisible(false);
+		choice2.setVisible(false);
+		choice3.setVisible(false);
+		choice4.setVisible(false);
 		
 		//displays string letter by letter (typewriter effect)
 		for (int i=0; i<dialogue.length(); i++){
@@ -112,10 +133,10 @@ public class gameWindow extends JFrame implements ActionListener {
 			
 			//try and catch for Thread.sleep, just in case there are errors.
 			try {
-				Thread.sleep(60);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				
-				System.out.println("Something went wrong in the sentence.");
+				System.out.println("Something went wrong in the sentence (Typewriter).");
 			}
 		}
 		
@@ -127,7 +148,7 @@ public class gameWindow extends JFrame implements ActionListener {
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
-				System.out.println("Loop sleep went wrong");
+				System.out.println("The while loop sleep went wrong (Typewriter).");
 			}
 		}
 		//newline for splitting up sentences
@@ -141,11 +162,133 @@ public class gameWindow extends JFrame implements ActionListener {
 		display.setText("");
 	}
 	
+	public static void askQuestion(String q1){
+		choice1.setText(q1);
+		choice1.setVisible(true);
+		
+		isQuestion = true;
+		reply.setEnabled(true);
+		next.setEnabled(false);
+		
+		//make sure conversation doesn't move on without a reply
+		while (isQuestion){
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				System.out.println("Something in the while loop went wrong (isQuestion).");
+			}
+		}
+		//print out player's reply
+		display.append(q1);
+		display.append("\n");
+	}
+	
+	public static void askQuestion(String q1, String q2){
+		choice1.setText(q1);
+		choice2.setText(q2);
+		
+		choice1.setVisible(true);
+		choice2.setVisible(true);
+		
+		isQuestion = true;
+		reply.setEnabled(true);
+		next.setEnabled(false);
+		
+		//make sure conversation doesn't move on without a reply
+		while (isQuestion){
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				System.out.println("Something in the while loop went wrong (isQuestion).");
+			}
+		}
+		//print out player's reply
+		if (choice1.isSelected()) {
+			display.append(q1);
+		}
+		if (choice2.isSelected()){
+			display.append(q2);
+		}
+		display.append("\n");
+	}
+	
+	public static void askQuestion(String q1, String q2, String q3){
+		choice1.setText(q1);
+		choice2.setText(q2);
+		choice3.setText(q3);
+		
+		choice1.setVisible(true);
+		choice2.setVisible(true);
+		choice3.setVisible(true);
+		
+		isQuestion = true;
+		reply.setEnabled(true);
+		next.setEnabled(false);
+		
+		//make sure conversation doesn't move on without a reply
+		while (isQuestion){
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				System.out.println("Something in the while loop went wrong (isQuestion).");
+			}
+		}
+		//print out player's reply
+		if (choice1.isSelected()) {
+			display.append(q1);
+		}
+		if (choice2.isSelected()){
+			display.append(q2);
+		}
+		if (choice3.isSelected()){
+			display.append(q3);
+		}
+		display.append("\n");
+	}
+	
+	public static void askQuestion(String q1, String q2, String q3, String q4){
+		choice1.setText(q1);
+		choice2.setText(q2);
+		choice3.setText(q3);
+		choice4.setText(q4);
+		
+		choice1.setVisible(true);
+		choice2.setVisible(true);
+		choice3.setVisible(true);
+		choice4.setVisible(true);
+		
+		isQuestion = true;
+		reply.setEnabled(true);
+		next.setEnabled(false);
+		
+		//make sure conversation doesn't move on without a reply
+		while (isQuestion){
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				System.out.println("Something in the while loop went wrong (isQuestion).");
+			}
+		}
+		//print out player's reply
+		if (choice1.isSelected()) {
+			display.append(q1);
+		}
+		if (choice2.isSelected()){
+			display.append(q2);
+		}
+		if (choice3.isSelected()){
+			display.append(q3);
+		}
+		if (choice4.isSelected()){
+			display.append(q4);
+		}
+		display.append("\n");
+	}
 	
 	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////  END OF ACTIONLISTENER. SCRIPT METHODS BELOW.	///////////////////////////
+	////////////////////////  END OF MISCELLANEOUS. SCRIPT METHODS BELOW.	///////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
@@ -155,12 +298,23 @@ public class gameWindow extends JFrame implements ActionListener {
 		typewriter("I'm going to name you...Teddy.");
 		typewriter("Today's my birthday! I'm four years old!");
 		typewriter("Will you be my friend?");
+		
+		askQuestion("...");
+		
 		typewriter("I start school tomorrow.");
 		typewriter("I hope I make some new friends. I hope they like me "
 				+ "and then lots of people will come to my party next year!");
 		typewriter("So...Will you be my friend?");
+		
+		askQuestion("...");
+		
 		typewriter("Pleeeaaaseee?");
+		
+		askQuestion("...");
+		
 		typewriter("I have to go to bed. Think about it, okay?");
+		
+		askQuestion("Goodnight, friend.", "See you in the morning.");
 	}
 	
 	public static int scene_two(){
@@ -168,24 +322,49 @@ public class gameWindow extends JFrame implements ActionListener {
 		newScene();
 		
 		typewriter("Good morning, Teddy!");
+		askQuestion("Good morning, friend!", "Hi.");
 		typewriter("Ha! I knew you could talk!");
+		askQuestion("You're my friend. Of course I'll talk to you.", "You kept talking to me, I figured I should reply");
 		
-		//if statement here for different responses
-		typewriter("Yay! You're my friend! Forever?");
-		//reply 2
-		typewriter("I'm happy you talk. Now I have someone to talk to.");
+		if (choice1.isSelected()){
+			typewriter("Yay! You're my friend! Forever?");
+			askQuestion("Always.","Sure, whatever.");
+		}
+		if (choice2.isSelected()){
+			typewriter("I'm happy you talk. Now I have someone to talk to.");
+		}
 		
 		typewriter("Today's my first day at school. I'm kinda scared.");
 		typewriter("I don't really know any other kids. What if they don't like me?");
-		typewriter("Ah...ok. Then we can all play together!");
+		askQuestion("If you try hard, you'll make friends.", "Just be yourself, you'll find friends.");
 		
-		//additional dialogue based on response
-		typewriter("Why?");
-		typewriter("Haha, okay Teddy");
+		//deviation based on dialogue choice
+		if (choice1.isSelected()){
+			typewriter("Ah...ok. Then we can all play together!");
+			if (choice2.isSelected()){
+				typewriter("Why?");
+				askQuestion("I'm...shy.", "I'm...not real.");
+				typewriter("Haha, okay Teddy");
+			}
+			typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
+			
+			return 1;
+		}
+		
+		//other path if choice 2 is chosen
+		else {
+		typewriter("Ah...ok. Then we can all play together!");
+		askQuestion("Sounds like fun","Well, other kids won't be able to talk to me.");
+		if (choice2.isSelected()){
+			typewriter("Why?");
+			askQuestion("I'm...shy.", "I'm...not real.");
+			typewriter("Haha, okay Teddy");
+		}
 		
 		typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
 		
-		return 1;
+		return 0;
+		}
 	}
 	
 	public static void scene_3a(){
