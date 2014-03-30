@@ -368,7 +368,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	
 	public static void scene_one(){
-		changePicture("Scene1-1.png");
+		changePicture("Scene1-1.gif");
 		typewriter("Hello?");
 		typewriter("Hellooo?");
 		typewriter("I'm going to name you...Teddy.");
