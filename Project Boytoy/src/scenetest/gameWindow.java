@@ -1,7 +1,6 @@
 package scenetest;
 
 //imports
-//import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -86,10 +85,6 @@ public class gameWindow extends JFrame implements ActionListener {
 		reply.addActionListener(this);
 		p3.add(next);
 		p3.add(reply);
-		
-
-		
-		
 		
 		
 		//set layout
@@ -241,6 +236,7 @@ public class gameWindow extends JFrame implements ActionListener {
 			}
 		}
 		//print out player's reply
+		display.append(" ");
 		display.append(q1);
 		display.append("\n");
 	}
@@ -269,7 +265,7 @@ public class gameWindow extends JFrame implements ActionListener {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
 			}
 		}
-
+		display.append(" ");
 		if (choice1.isSelected()) {
 			display.append(q1);
 		}
@@ -305,6 +301,7 @@ public class gameWindow extends JFrame implements ActionListener {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
 			}
 		}
+		display.append(" ");
 		if (choice1.isSelected()) {
 			display.append(q1);
 		}
@@ -345,6 +342,7 @@ public class gameWindow extends JFrame implements ActionListener {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
 			}
 		}
+		display.append(" ");
 		if (choice1.isSelected()) {
 			display.append(q1);
 		}
@@ -396,6 +394,10 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		askQuestion("Goodnight, friend.", "See you in the morning.");
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	public static int scene_two(){
 		
@@ -457,6 +459,10 @@ public class gameWindow extends JFrame implements ActionListener {
 		return 0;
 		}
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	public static void scene_3a(){
 		//occurs when the player advised the boy to "try hard"
@@ -521,7 +527,43 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	public static int scene_four(){
+		
+		newScene();
+		
+		typewriter("Hi Teddy. Guess what?");
+		typewriter("I talked to someone today");
+		askQuestion("About time.", "That's great!", "You don't seem excited about it.");
+		typewriter("Not really...she called me crazy.");
+		typewriter("I'm not crazy! She's just mean!");
+		askQuestion("Why did she call you crazy?", "Why is she mean?");
+		if (choice1.isSelected()){
+			typewriter("I told her about you. She said I was crazy.");
+		}
+		if (choice2.isSelected()){
+			typewriter("We were playing, and I said you like playing too.");
+			typewriter("I told her about you, and that you listen to me and help.");
+			typewriter("She called me crazy and laughed at me.");
+		}
+		askQuestion("Others may not believe I exist and make fun of you.", "Don't talk about me to others, they won't understand.", "...I'm not real. I don't actually talk.");
+		if (choice3.isSelected()){
+			typewriter("But you're my friend...my best friend.");
+			askQuestion("I am, but I'm not real. I'm in your imagination.");
+			typewriter("But you help me!");
+			askQuestion("You're just talking to yourself.", "I'm a toy you turned into a friend.");
+			typewriter("But...I love you, Teddy.");
+			askQuestion("I love you too.");
+			
+			return 0;
+		}
+		else {
+			typewriter("Okay.");
+		}
+		return 1;
+	}
 	
 	
 	
