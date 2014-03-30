@@ -23,6 +23,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	private static JRadioButton choice2 = new JRadioButton();
 	private static JRadioButton choice3 = new JRadioButton();
 	private static JRadioButton choice4 = new JRadioButton();
+	private static JRadioButton unselect = new JRadioButton();
 	
 	private static ImageIcon sceneImage;
 	
@@ -48,10 +49,12 @@ public class gameWindow extends JFrame implements ActionListener {
 		choices.add(choice2);
 		choices.add(choice3);
 		choices.add(choice4);
+		choices.add(unselect);
 		choice1.addActionListener(this);
 		choice2.addActionListener(this);
 		choice3.addActionListener(this);
 		choice4.addActionListener(this);
+		unselect.addActionListener(this);
 		
 		
 		
@@ -63,19 +66,19 @@ public class gameWindow extends JFrame implements ActionListener {
 		JPanel p1 = new JPanel();
 		p1.setLayout(new BorderLayout());
 		p1.add(picture, BorderLayout.NORTH);
-		//p1.setPreferredSize(512,200);
 		p1.add(scroll, BorderLayout.SOUTH);
 		p1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		
 		//Panel p2 --> panel for radio buttons
 		JPanel p2 = new JPanel();
-		p2.setLayout(new GridLayout(4,1));
+		p2.setLayout(new GridLayout(5,1));
 		//add buttons to GUI
 		p2.add(choice1);
 		p2.add(choice2);
 		p2.add(choice3);
 		p2.add(choice4);
+		p2.add(unselect);
 		
 		
 		//Panel 3 --> panel for reply and next buttons.
@@ -94,8 +97,6 @@ public class gameWindow extends JFrame implements ActionListener {
 		cp.add(p3, BorderLayout.SOUTH);
 		
 	}
-	
-	
 	
 	
 	
@@ -125,12 +126,13 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	public static void typewriter(String dialogue){
 		//reset to defaults
-		defaultVal();
+		defaultValue();
 		
 		choice1.setVisible(false);
 		choice2.setVisible(false);
 		choice3.setVisible(false);
 		choice4.setVisible(false);
+		unselect.setVisible(false);
 		
 		display.append(" ");
 		
@@ -167,24 +169,27 @@ public class gameWindow extends JFrame implements ActionListener {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	public static void defaultVal(){
+	public static void defaultValue(){
 		/*resets to defaults to ensure that scene carries out correctly
 		 * 
 		 * pause = true				--> ensure the scene pauses to allow user to read it.
 		 * isQuestion = false		--> ensure methods aren't accidentally pausing for reply
 		 * next.setEnabled(false)	--> ensure disabled until needed
 		 * reply.setEnabled(false)	--> ensure disabled until needed
+		 * unselect.setEnabled(true)--> ensure the other replies aren't selected
 		 * 
 		 */
 		pause = true;
 		isQuestion = false;
 		next.setEnabled(false);
 		reply.setEnabled(false);
+		unselect.setSelected(true);
 	}
 	
 	public static void newScene(){
 		//clears text area for new scene
 		display.setText("");
+		hideButtons();
 	}
 	
 	public static void changePicture(String imageName){
@@ -204,6 +209,13 @@ public class gameWindow extends JFrame implements ActionListener {
 		}
 	}
 	
+	public static void hideButtons(){
+		choice1.setVisible(false);
+		choice2.setVisible(false);
+		choice3.setVisible(false);
+		choice4.setVisible(false);
+		unselect.setVisible(false);
+	}
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,13 +235,19 @@ public class gameWindow extends JFrame implements ActionListener {
 		choice1.setVisible(true);
 		
 		isQuestion = true;
-		reply.setEnabled(true);
 		next.setEnabled(false);
+		
 		
 		//make sure conversation doesn't move on without a reply.
 		//briefly sleeps between checking if isQuestion is still true.
 		while (isQuestion){
 			try {
+				if (unselect.isSelected()){
+					reply.setEnabled(false);
+				}
+				else {
+					reply.setEnabled(true);
+				}
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
@@ -255,11 +273,16 @@ public class gameWindow extends JFrame implements ActionListener {
 		choice2.setVisible(true);
 		
 		isQuestion = true;
-		reply.setEnabled(true);
 		next.setEnabled(false);
 		
 		while (isQuestion){
 			try {
+				if (unselect.isSelected()){
+					reply.setEnabled(false);
+				}
+				else {
+					reply.setEnabled(true);
+				}
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
@@ -291,11 +314,16 @@ public class gameWindow extends JFrame implements ActionListener {
 		choice3.setVisible(true);
 		
 		isQuestion = true;
-		reply.setEnabled(true);
 		next.setEnabled(false);
 		
 		while (isQuestion){
 			try {
+				if (unselect.isSelected()){
+					reply.setEnabled(false);
+				}
+				else {
+					reply.setEnabled(true);
+				}
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
@@ -321,6 +349,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		 * 
 		 */
 		
+		
 		choice1.setText(q1);
 		choice2.setText(q2);
 		choice3.setText(q3);
@@ -332,11 +361,16 @@ public class gameWindow extends JFrame implements ActionListener {
 		choice4.setVisible(true);
 		
 		isQuestion = true;
-		reply.setEnabled(true);
 		next.setEnabled(false);
 		
 		while (isQuestion){
 			try {
+				if (unselect.isSelected()){
+					reply.setEnabled(false);
+				}
+				else {
+					reply.setEnabled(true);
+				}
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				System.out.println("Something in the while loop went wrong (isQuestion).");
@@ -392,7 +426,9 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		changePicture("Scene1-3.png");
 		
+		askQuestion("...");
 		askQuestion("Goodnight, friend.", "See you in the morning.");
+		pause(2000);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -405,7 +441,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		changePicture("Scene2-1.png");
 		
-		pause(3000);
+		pause(2000);
 		
 		changePicture("Scene2-2.png");
 		
@@ -592,7 +628,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	    else {
 	    	scene_3b();
 	    }
-
+	    returnedValue = scene_four();
 	}
 
 }
