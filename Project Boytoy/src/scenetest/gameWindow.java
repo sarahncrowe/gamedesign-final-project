@@ -440,8 +440,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		changePicture("Scene1-3.png");
 		
 		askQuestion("...");
-		pause(2000);
 		hideButtons();
+		pause(2000);
 		askQuestion("Goodnight, friend.", "See you in the morning.");
 		if (choice1.isSelected()){
 			attachment++;
@@ -742,32 +742,25 @@ public class gameWindow extends JFrame implements ActionListener {
 							return 2; //ends with beginning of unhealthy attachment to bear
 						}
 					}
-					
 				}
-				else if (choice2.isSelected()){
-					typewriter("Yeah...I don't need people that are going to call me crazy!");
-					return 2;
-				}
-				else {
-					if (attachment > 6){
-						return 2;
-					}
-					else {
-						return 1;
-					}
-				}
-			return 0; //ends with no attachment
 			}
 		}
-		else {
-			typewriter("Okay. I'll keep you a secret.");
-		}
-		if (attachment > 5){
+		else if (choice2.isSelected()){
+			typewriter("Yeah...I don't need people that are going to call me crazy!");
 			return 2;
 		}
+		
 		else {
-			return 1;
+			typewriter("Okay. I'll keep you a secret.");
+		
+			if (attachment > 5){
+				return 2;
+			}
+			else {
+				return 1;
+			}
 		}
+		return 1;
 	}
 	
 	public static void epilogue(int scene){
@@ -823,11 +816,13 @@ public class gameWindow extends JFrame implements ActionListener {
 		    
 		    typewriter("This is only one ending.");
 		    typewriter("Would you like to play again?");
+		    askQuestion("Yes", "No");
 		    if (choice1.isSelected()){
 		    	replay = true;
 		    }
 		    else if (choice2.isSelected()){
 		    	replay = false;
+		    	display.setText("");
 		    }
 	    }
 	    
