@@ -476,7 +476,7 @@ public class gameWindow extends JFrame implements ActionListener {
 			attachment++;
 		}
 		
-		changePicture("Scene2-3.png");
+		changePicture("Scene2-3.gif");
 		typewriter("Ha! I knew you could talk!");
 		
 		askQuestion("You're my friend. Of course I'll talk to you.", "You kept talking to me, I figured I should reply.");
@@ -514,11 +514,11 @@ public class gameWindow extends JFrame implements ActionListener {
 				}
 				typewriter("Haha, okay Teddy.");
 			}
-			changePicture("Scene2-4.png");
+			changePicture("Scene2-4.gif");
 			typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
-			changePicture("Scene2-5.png");
+			changePicture("Scene2-5.gif");
 			hideButtons();
-			pause(1000);
+			pause(3000);
 			return 1;
 		}
 		
@@ -646,7 +646,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		pause(100);
 		typewriter("Good night, Teddy.");
 		changePicture("Scene3B-3.gif");
-		pause(4000);
+		pause(3000);
 		
 	}
 	
@@ -688,6 +688,12 @@ public class gameWindow extends JFrame implements ActionListener {
 				typewriter("Why do you keep saying that, Teddy? What do you mean?");
 				askQuestion("Nothing, forget about it.", "I'm just your imagination.", "The girl was right, you are crazy.");
 				if (choice3.isSelected()){
+					if (injured){
+						changePicture("Scene4A-2.gif");
+					}
+					else {
+						changePicture("Scene4B-2.gif");
+					}
 					typewriter("Shut up, Teddy. I'm NOT crazy!");
 					typewriter("...I don't want to talk to you anymore.");
 					attachment = attachment-10;
@@ -704,6 +710,12 @@ public class gameWindow extends JFrame implements ActionListener {
 				}
 			}
 			else {
+				if (injured){
+					changePicture("Scene4A-2.gif");
+				}
+				else {
+					changePicture("Scene4B-2.gif");
+				}
 				typewriter("But you're my friend...my best friend.");
 				askQuestion("I am, but I'm not real. I'm in your imagination.");
 				typewriter("But you help me!");
@@ -715,22 +727,7 @@ public class gameWindow extends JFrame implements ActionListener {
 					typewriter("But then I'll be alone.");
 					typewriter("...Teddy?");
 					
-					if (attachment > 5 && injured){
-						changePicture("Scene4A-2.gif");
-						typewriter("Don't leave me Teddy!");
-						askQuestion("...", "I guess you really do need me.");
-					
-						if (choice1.isSelected()){
-							return 0; //ends with no attachment to bear
-						}
-						else {
-							typewriter("Yeah, I do.");
-							return 2; //ends with beginning of unhealthy attachment to bear
-						}
-						
-					}
-					else if (attachment > 5){
-						changePicture("Scene4B-2.gif");
+					if (attachment > 5){
 						typewriter("Don't leave me Teddy!");
 						askQuestion("...", "I guess you really do need me.");
 					
@@ -751,7 +748,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		}
 		
 		else {
-			typewriter("Okay. I'll keep you a secret.");
+			typewriter("Okay. I'll just keep you a secret.");
 		
 			if (attachment > 5){
 				return 2;
@@ -760,7 +757,7 @@ public class gameWindow extends JFrame implements ActionListener {
 				return 1;
 			}
 		}
-		return 1;
+		return 0;
 	}
 	
 	public static void epilogue(int scene){
@@ -771,17 +768,26 @@ public class gameWindow extends JFrame implements ActionListener {
 		 */
 		
 		hideButtons();
-		pause(2000);
+		pause(1000);
 		newScene();
 		
 		if (scene == 0) {
-			changePicture("Scene5-1.png");
+			changePicture("Scene5-1.gif");
+			pause(8500);
+			changePicture("Result1.gif");
+			pause(10000);
 		}
 		if (scene == 1){
-			changePicture("Scene5-2.png");
+			changePicture("Scene5-2.gif");
+			pause(9000);
+			changePicture("Result2.gif");
+			pause(10000);
 		}
 		if (scene == 2){
-			changePicture("Scene5-3.png");
+			changePicture("Scene5-3.gif");
+			pause(9000);
+			changePicture("Result3.gif");
+			pause(10000);
 		}
 	}
 	
@@ -819,14 +825,13 @@ public class gameWindow extends JFrame implements ActionListener {
 		    askQuestion("Yes", "No");
 		    if (choice1.isSelected()){
 		    	replay = true;
+		    	display.setText("");
 		    }
 		    else if (choice2.isSelected()){
 		    	replay = false;
 		    	display.setText("");
+		    	hideButtons();
 		    }
-	    }
-	    
-	    
+	    }   
 	}
-
 }
