@@ -256,6 +256,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		//print out player's reply
 		display.append(" ");
 		display.append(q1);
+		display.setCaretPosition(display.getDocument().getLength());
 		display.append("\n");
 	}
 	
@@ -291,10 +292,12 @@ public class gameWindow extends JFrame implements ActionListener {
 		display.append(" ");
 		if (choice1.isSelected()) {
 			display.append(q1);
+			
 		}
 		if (choice2.isSelected()){
 			display.append(q2);
 		}
+		display.setCaretPosition(display.getDocument().getLength());
 		display.append("\n");
 	}
 	
@@ -339,6 +342,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		if (choice3.isSelected()){
 			display.append(q3);
 		}
+		display.setCaretPosition(display.getDocument().getLength());
 		display.append("\n");
 	}
 	
@@ -389,6 +393,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		if (choice4.isSelected()){
 			display.append(q4);
 		}
+		display.setCaretPosition(display.getDocument().getLength());
 		display.append("\n");
 	}
 	
@@ -401,6 +406,8 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	public static void scene_one(){
 		changePicture("Scene1-1.gif");
+		hideButtons();
+		pause(2000);
 		typewriter("Hello?");
 		typewriter("Hellooo?");
 		typewriter("I'm going to name you...Teddy.");
@@ -444,7 +451,11 @@ public class gameWindow extends JFrame implements ActionListener {
 		pause(2000);
 		
 		changePicture("Scene2-2.png");
-		
+		pause(100);
+		changePicture("Scene2-1.png");
+		pause(100);
+		changePicture("Scene2-2.png");
+		pause(500);
 		typewriter("Good morning, Teddy!");
 		
 		askQuestion("Good morning, friend!", "Hi.");
@@ -477,6 +488,7 @@ public class gameWindow extends JFrame implements ActionListener {
 			changePicture("Scene2-4.png");
 			typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
 			changePicture("Scene2-5.png");
+			pause(1000);
 			return 1;
 		}
 		
@@ -492,6 +504,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		changePicture("Scene2-4.png");
 		typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
 		changePicture("Scene2-5.png");
+		pause(1500);
 		return 0;
 		}
 	}
@@ -504,6 +517,8 @@ public class gameWindow extends JFrame implements ActionListener {
 		//occurs when the player advised the boy to "try hard"
 		
 		newScene();
+		pause(1000);
+		changePicture("Scene3A-1.png");
 		askQuestion("Oh no! Are you okay?");
 		typewriter("The other boy wouldn't let me play with him");
 		askQuestion("What happened");
@@ -519,14 +534,19 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		typewriter("Mommy is mad at me, and Dad told me to go to bed."
 				+ " I don't want to get in more trouble.");
+		changePicture("Scene3A-2.png");
 		askQuestion("I understand, Goodnight.", "I'm very disappointed. Go to sleep.");
 		typewriter("Good night, Teddy");
+		changePicture("Scene3A-3.png");
+		pause(2000);
 	}
 	
 	public static void scene_3b(){
 		//occurs when the player advises the boy to be himself
 		
 		newScene();
+		changePicture("Scene3B-1.png");
+		pause(1000);
 		askQuestion("What's wrong?", "What's up with you?", "What's your problem?");
 		typewriter("No one played with me. No one wanted to be my friend.");
 		askQuestion("I'm still your friend.", "Give it time, the others will play with you.", "I can see why. No one wants to play with a crybaby.");
@@ -559,7 +579,10 @@ public class gameWindow extends JFrame implements ActionListener {
 			}
 		}
 		typewriter("Mommy wants me to go to bed.");
+		changePicture("Scene3B-2.png");
+		pause(100);
 		typewriter("Good night, Teddy.");
+		changePicture("Scene3B-3.png");
 		
 	}
 	
