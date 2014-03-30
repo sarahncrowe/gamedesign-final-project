@@ -25,10 +25,16 @@ public class gameWindow extends JFrame implements ActionListener {
 	private static JRadioButton choice4 = new JRadioButton();
 	private static JRadioButton unselect = new JRadioButton();
 	
+	//the game has graphics!
 	private static ImageIcon sceneImage;
 	
+	//flags for dialogue and appearance deviations
 	private static boolean notReal = false;
-	
+	private static boolean blackEye = false;
+	private static boolean unhealthyAttachment = false;
+	private static boolean healthyAttachment = false;
+ 	
+	private static int attachment = 0;
 	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -438,6 +444,9 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		askQuestion("...");
 		askQuestion("Goodnight, friend.", "See you in the morning.");
+		if (choice1.isSelected()){
+			attachment++;
+		}
 		hideButtons();
 		pause(2000);
 	}
@@ -463,6 +472,9 @@ public class gameWindow extends JFrame implements ActionListener {
 		typewriter("Good morning, Teddy!");
 		
 		askQuestion("Good morning, friend!", "Hi.");
+		if (choice1.isSelected()){
+			attachment++;
+		}
 		
 		changePicture("Scene2-3.png");
 		typewriter("Ha! I knew you could talk!");
@@ -472,6 +484,12 @@ public class gameWindow extends JFrame implements ActionListener {
 		if (choice1.isSelected()){
 			typewriter("Yay! You're my friend! Forever?");
 			askQuestion("Always.","Sure.", "Yeah, whatever.");
+			if (choice1.isSelected()){
+				attachment++;
+			}
+			if (choice3.isSelected()){
+				attachment--;
+			}
 		}
 		if (choice2.isSelected()){
 			typewriter("I'm happy you talk. Now I have someone to talk to.");
@@ -484,8 +502,11 @@ public class gameWindow extends JFrame implements ActionListener {
 		//deviation based on dialogue choice
 		if (choice1.isSelected()){
 			typewriter("Ah...ok. Then we can all play together!");
-			askQuestion("Sounds like fun","Well, other kids won't be able to talk to me.");
-			if (choice2.isSelected()){
+			askQuestion("Yeah! That sounds awesome!","Sounds like fun.","Well, other kids won't be able to talk to me.");
+			if (choice1.isSelected()){
+				attachment++;
+			}
+			if (choice3.isSelected()){
 				typewriter("Why?");
 				askQuestion("I'm...shy.", "I'm...not real.");
 				if (choice2.isSelected()){
@@ -504,8 +525,11 @@ public class gameWindow extends JFrame implements ActionListener {
 		//other path if choice 2 is chosen
 		else {
 		typewriter("Ah...ok. Then we can all play together!");
-		askQuestion("Sounds like fun","Well, other kids won't be able to talk to me.");
-		if (choice2.isSelected()){
+		askQuestion("Yeah! That sounds awesome!","Sounds like fun.","Well, other kids won't be able to talk to me.");
+		if (choice1.isSelected()){
+			attachment++;
+		}
+		if (choice3.isSelected()){
 			typewriter("Why?");
 			askQuestion("I'm...shy.", "I'm...not real.");
 			if (choice2.isSelected()){
@@ -515,9 +539,9 @@ public class gameWindow extends JFrame implements ActionListener {
 		}
 		changePicture("Scene2-4.png");
 		typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
-		changePicture("Scene2-5.png");
+		changePicture("Scene2-5.gif");
 		hideButtons();
-		pause(1500);
+		pause(3000);
 		return 0;
 		}
 	}
@@ -531,8 +555,13 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		newScene();
 		pause(1000);
-		changePicture("Scene3A-1.png");
+		blackEye = true;
+		changePicture("Scene3A-1.gif");
+		
 		askQuestion("Oh no! Are you okay?", "What's up with your face?");
+		if (choice1.isSelected()){
+			attachment++;
+		}
 		typewriter("The other boy wouldn't let me play with him.");
 		askQuestion("What happened?", "Yeah, and...?");
 		typewriter("I tried really hard to make friends. I pushed him...and he hit me!");
@@ -543,33 +572,42 @@ public class gameWindow extends JFrame implements ActionListener {
 		if (choice2.isSelected()){
 			typewriter("No one will talk to me now...");
 			askQuestion("The other kids will still like you, but you have to be nice.", "I'll still talk to you.");
+			if (choice2.isSelected()){
+				attachment++;
+			}
 		}
 		
 		typewriter("Mommy is mad at me, and Dad told me to go to bed."
 				+ " I don't want to get in more trouble.");
 		changePicture("Scene3A-2.png");
 		askQuestion("I understand, Goodnight.", "I'm very disappointed. Go to sleep.", "You deserve it.");
+		if (choice3.isSelected()){
+			attachment = attachment - 2;
+		}
+		
 		typewriter("Good night, Teddy.");
-		changePicture("Scene3A-3.png");
-		pause(2000);
+		changePicture("Scene3A-3.gif");
+		pause(4000);
 	}
 	
 	public static void scene_3b(){
 		//occurs when the player advises the boy to be himself
 		
 		newScene();
-		changePicture("Scene3B-1.png");
+		changePicture("Scene3B-1.gif");
 		pause(1000);
 		askQuestion("What's wrong?", "What's up with you?", "What's your problem?");
 		typewriter("No one played with me. No one wanted to be my friend.");
 		askQuestion("I'm still your friend.", "Give it time, the others will play with you.", "I can see why. No one wants to play with a crybaby.");
 		if (choice1.isSelected()){
+			attachment++;
 			typewriter("But why didn't they play with me?");
 		}
 		if (choice2.isSelected()){
 			typewriter("But how do I make them my friends?");
 		}
 		if (choice3.isSelected()){
+			attachment = attachment - 3;
 			typewriter("That's really mean, Teddy...");
 			typewriter("But...is that really why they didn't play with me?");
 			
@@ -595,16 +633,27 @@ public class gameWindow extends JFrame implements ActionListener {
 		changePicture("Scene3B-2.png");
 		pause(100);
 		typewriter("Good night, Teddy.");
-		changePicture("Scene3B-3.png");
+		changePicture("Scene3B-3.gif");
+		pause(4000);
 		
 	}
 	
+	
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static int scene_four(){
+	public static int scene_four(boolean injured){
 		
 		newScene();
+		
+		//still shows injuries if obtained
+		if (injured){
+			changePicture("Scene4A-1.gif");
+		}
+		else {
+			changePicture("Scene4B-1.gif");
+		}
 		
 		typewriter("Hi Teddy. Guess what?");
 		typewriter("I talked to someone today.");
@@ -625,12 +674,20 @@ public class gameWindow extends JFrame implements ActionListener {
 			if (notReal){
 				typewriter("Why do you keep saying that, Teddy? What do you mean?");
 				askQuestion("Nothing, forget about it.", "I'm just your imagination.", "The girl was right, you are crazy.");
-				if (choice1.isSelected()){
-					typewriter("Okay...maybe I should just keep you a secret to everyone.");
-				}
 				if (choice3.isSelected()){
 					typewriter("Shut up, Teddy. I'm NOT crazy!");
 					typewriter("...I don't want to talk to you anymore.");
+					attachment = attachment-10;
+					return 0; //ends with no attachment to bear
+				}
+				else{
+					typewriter("Okay...maybe I should just keep you a secret to everyone.");
+					if (attachment > 6){
+						return 2; //ends with beginning of unhealthy attachment
+					}
+					else {
+						return 1; //ends with healthy attachment
+					}
 				}
 			}
 			else {
@@ -640,20 +697,66 @@ public class gameWindow extends JFrame implements ActionListener {
 				askQuestion("You're just talking to yourself.", "I'm a toy you turned into a friend.");
 				typewriter("But...I love you, Teddy.");
 				askQuestion("I love you too.", "...I don't think we should talk anymore.");
+				
 				if (choice2.isSelected()){
 					typewriter("But then I'll be alone.");
 					typewriter("...Teddy?");
 				}
+					
+				if (attachment > 6 && injured){
+					changePicture("Scene4A-2");
+					typewriter("Don't leave me Teddy!");
+					askQuestion("...", "I guess you really do need me.");
+					
+					if (choice1.isSelected()){
+						return 0; //ends with no attachment to bear
+					}
+					else {
+						typewriter("Yeah, I do.");
+						return 2; //ends with beginning of unhealthy attachment to bear
+					}
+						
+				}
+				else if (attachment > 6){
+					changePicture("Scene4B-2");
+					changePicture("Scene4A-2");
+					typewriter("Don't leave me Teddy!");
+					askQuestion("...", "I guess you really do need me.");
+					
+					if (choice1.isSelected()){
+						return 0; //ends with no attachment to bear
+					}
+					else {
+						typewriter("Yeah, I do.");
+						return 2; //ends with beginning of unhealthy attachment to bear
+					}
+				}
 			}
-			return 0;
+			return 1; //ends with healthy attachment
 		}
 		else {
 			typewriter("Okay. I'll keep you a secret.");
 		}
-		return 1;
+		if (attachment > 6){
+			return 2;
+		}
+		else {
+			return 1;
+		}
 	}
 	
-	
+	public static void epilogue(int scene){
+		/*
+		 * scene = 0	-->	the boy has no attachment to the bear in the end
+		 * scene = 1	--> the boy has a healthy attachment to the bear in the end
+		 * scene = 2	--> the boy is starting to have an unhealthy attachment to the bear
+		 */
+		
+		
+		if (scene == 0) {
+			
+		}
+	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////	END OF SCRIPT. MAIN METHOD BELOW	///////////////////////////////
@@ -672,7 +775,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    //call story methods to actually play the game
-	    scene_one();
+	    //scene_one();
 	    returnedValue = scene_two();
 	    if (returnedValue == 1){
 	    	scene_3a();
@@ -680,7 +783,9 @@ public class gameWindow extends JFrame implements ActionListener {
 	    else {
 	    	scene_3b();
 	    }
-	    returnedValue = scene_four();
+	    returnedValue = scene_four(blackEye);
+	    
+	    epilogue(returnedValue);
 	}
 
 }
