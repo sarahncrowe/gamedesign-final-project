@@ -674,14 +674,13 @@ public class gameWindow extends JFrame implements ActionListener {
 			if (notReal){
 				typewriter("Why do you keep saying that, Teddy? What do you mean?");
 				askQuestion("Nothing, forget about it.", "I'm just your imagination.", "The girl was right, you are crazy.");
-				
 				if (choice3.isSelected()){
 					typewriter("Shut up, Teddy. I'm NOT crazy!");
 					typewriter("...I don't want to talk to you anymore.");
 					attachment = attachment-10;
 					return 0; //ends with no attachment to bear
 				}
-				else{
+				if (choice1.isSelected()){
 					typewriter("Okay...maybe I should just keep you a secret to everyone.");
 					if (attachment > 6){
 						return 2; //ends with beginning of unhealthy attachment
@@ -731,8 +730,17 @@ public class gameWindow extends JFrame implements ActionListener {
 							return 2; //ends with beginning of unhealthy attachment to bear
 						}
 					}
+					
 				}
-			return 0; //ends with healthy attachment
+				else {
+					if (attachment > 6){
+						return 2;
+					}
+					else {
+						return 1;
+					}
+				}
+			return 0; //ends with no attachment
 			}
 		}
 		else {
