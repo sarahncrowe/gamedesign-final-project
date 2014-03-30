@@ -79,3 +79,11 @@
 
 > My game maker folder is really messy with all the engines and tutorials I downloaded
 	> Have to clean it up, just don't want to delete something that might be important.
+	
+SOMETIME AFTER DEMO FEBRUARY 2014
+> Got the user input to work
+> Doing "advanced" things as a game maker beginner sucks.
+	
+17 MARCH 2014
+
+> Decided to switch to Java.

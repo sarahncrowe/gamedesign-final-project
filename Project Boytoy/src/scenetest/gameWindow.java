@@ -9,6 +9,12 @@ import javax.swing.*;
 public class gameWindow extends JFrame implements ActionListener {
 	
 
+	/**
+	 * I'm not even sure what this is for but it makes the game not have warnings. So there.
+	 */
+	private static final long serialVersionUID = -5634949808226458557L;
+	
+	
 	//initialize text area, scroll bar, buttons, radio buttons,
 	// label and icon for pictures, and boolean variables.
 	private static JTextArea display = new JTextArea(10, 75);
@@ -146,7 +152,7 @@ public class gameWindow extends JFrame implements ActionListener {
 			
 			//try and catch for Thread.sleep, just in case there are errors.
 			try {
-				Thread.sleep(10);
+				Thread.sleep(40);
 			} catch (InterruptedException e) {
 				
 				System.out.println("Something went wrong in the sentence (Typewriter).");
@@ -441,7 +447,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		askQuestion("...");
 		hideButtons();
-		pause(2000);
+		pause(1500);
 		askQuestion("Goodnight, friend.", "See you in the morning.");
 		if (choice1.isSelected()){
 			attachment++;
