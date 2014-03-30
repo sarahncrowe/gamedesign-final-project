@@ -215,6 +215,9 @@ public class gameWindow extends JFrame implements ActionListener {
 		choice3.setVisible(false);
 		choice4.setVisible(false);
 		unselect.setVisible(false);
+		
+		reply.setEnabled(false);
+		next.setEnabled(false);
 	}
 	
 	
@@ -435,6 +438,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		
 		askQuestion("...");
 		askQuestion("Goodnight, friend.", "See you in the morning.");
+		hideButtons();
 		pause(2000);
 	}
 	
@@ -463,11 +467,11 @@ public class gameWindow extends JFrame implements ActionListener {
 		changePicture("Scene2-3.png");
 		typewriter("Ha! I knew you could talk!");
 		
-		askQuestion("You're my friend. Of course I'll talk to you.", "You kept talking to me, I figured I should reply");
+		askQuestion("You're my friend. Of course I'll talk to you.", "You kept talking to me, I figured I should reply.");
 		
 		if (choice1.isSelected()){
 			typewriter("Yay! You're my friend! Forever?");
-			askQuestion("Always.","Sure, whatever.");
+			askQuestion("Always.","Sure.", "Yeah, whatever.");
 		}
 		if (choice2.isSelected()){
 			typewriter("I'm happy you talk. Now I have someone to talk to.");
@@ -480,14 +484,16 @@ public class gameWindow extends JFrame implements ActionListener {
 		//deviation based on dialogue choice
 		if (choice1.isSelected()){
 			typewriter("Ah...ok. Then we can all play together!");
+			askQuestion("Sounds like fun","Well, other kids won't be able to talk to me.");
 			if (choice2.isSelected()){
 				typewriter("Why?");
 				askQuestion("I'm...shy.", "I'm...not real.");
-				typewriter("Haha, okay Teddy");
+				typewriter("Haha, okay Teddy.");
 			}
 			changePicture("Scene2-4.png");
 			typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
 			changePicture("Scene2-5.png");
+			hideButtons();
 			pause(1000);
 			return 1;
 		}
@@ -499,11 +505,12 @@ public class gameWindow extends JFrame implements ActionListener {
 		if (choice2.isSelected()){
 			typewriter("Why?");
 			askQuestion("I'm...shy.", "I'm...not real.");
-			typewriter("Haha, okay Teddy");
+			typewriter("Haha, okay Teddy.");
 		}
 		changePicture("Scene2-4.png");
 		typewriter("I gotta go eat breakfast. Thanks Teddy, I'm not scared anymore. See you after school!");
 		changePicture("Scene2-5.png");
+		hideButtons();
 		pause(1500);
 		return 0;
 		}
@@ -519,24 +526,24 @@ public class gameWindow extends JFrame implements ActionListener {
 		newScene();
 		pause(1000);
 		changePicture("Scene3A-1.png");
-		askQuestion("Oh no! Are you okay?");
-		typewriter("The other boy wouldn't let me play with him");
-		askQuestion("What happened");
-		typewriter("I pushed him...but he hit me!");
+		askQuestion("Oh no! Are you okay?", "What's up with your face?");
+		typewriter("The other boy wouldn't let me play with him.");
+		askQuestion("What happened?", "Yeah, and...?");
+		typewriter("I tried really hard to make friends. I pushed him...and he hit me!");
 		askQuestion("Did you hit him back?","That's not how we make friends.");
 		if (choice1.isSelected()){
-			typewriter("No...the teacher pulled me away");
+			typewriter("No...the teacher pulled me away.");
 		}
 		if (choice2.isSelected()){
-			typewriter("I tried really hard though! No one will talk to me now...");
+			typewriter("No one will talk to me now...");
 			askQuestion("The other kids will still like you, but you have to be nice.", "I'll still talk to you.");
 		}
 		
 		typewriter("Mommy is mad at me, and Dad told me to go to bed."
 				+ " I don't want to get in more trouble.");
 		changePicture("Scene3A-2.png");
-		askQuestion("I understand, Goodnight.", "I'm very disappointed. Go to sleep.");
-		typewriter("Good night, Teddy");
+		askQuestion("I understand, Goodnight.", "I'm very disappointed. Go to sleep.", "You deserve it.");
+		typewriter("Good night, Teddy.");
 		changePicture("Scene3A-3.png");
 		pause(2000);
 	}
@@ -557,7 +564,7 @@ public class gameWindow extends JFrame implements ActionListener {
 			typewriter("But how do I make them my friends?");
 		}
 		if (choice3.isSelected()){
-			typewriter("That's really mean, Teddy");
+			typewriter("That's really mean, Teddy...");
 			typewriter("But...is that really why they didn't play with me?");
 			
 		}
@@ -570,7 +577,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		}
 		if (choice2.isSelected()){
 			typewriter("What if they're mean?");
-			askQuestion("Find the good ones.", "Then keep playing alone.");
+			askQuestion("Find the nice ones.", "Then keep playing alone.");
 			if (choice1.isSelected()){
 				typewriter("Okay, I'll try...");
 			}
@@ -594,7 +601,7 @@ public class gameWindow extends JFrame implements ActionListener {
 		newScene();
 		
 		typewriter("Hi Teddy. Guess what?");
-		typewriter("I talked to someone today");
+		typewriter("I talked to someone today.");
 		askQuestion("About time.", "That's great!", "You don't seem excited about it.");
 		typewriter("Not really...she called me crazy.");
 		typewriter("I'm not crazy! She's just mean!");
@@ -619,7 +626,7 @@ public class gameWindow extends JFrame implements ActionListener {
 			return 0;
 		}
 		else {
-			typewriter("Okay.");
+			typewriter("Okay. I'll keep you a secret.");
 		}
 		return 1;
 	}
