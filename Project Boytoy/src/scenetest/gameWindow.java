@@ -27,7 +27,7 @@ public class gameWindow extends JFrame implements ActionListener {
 	
 	private static ImageIcon sceneImage;
 	
-	
+	private static boolean notReal = false;
 	
 	
 
@@ -488,6 +488,9 @@ public class gameWindow extends JFrame implements ActionListener {
 			if (choice2.isSelected()){
 				typewriter("Why?");
 				askQuestion("I'm...shy.", "I'm...not real.");
+				if (choice2.isSelected()){
+					notReal = true;
+				}
 				typewriter("Haha, okay Teddy.");
 			}
 			changePicture("Scene2-4.png");
@@ -505,6 +508,9 @@ public class gameWindow extends JFrame implements ActionListener {
 		if (choice2.isSelected()){
 			typewriter("Why?");
 			askQuestion("I'm...shy.", "I'm...not real.");
+			if (choice2.isSelected()){
+				notReal = true;
+			}
 			typewriter("Haha, okay Teddy.");
 		}
 		changePicture("Scene2-4.png");
@@ -616,13 +622,29 @@ public class gameWindow extends JFrame implements ActionListener {
 		}
 		askQuestion("Others may not believe I exist and make fun of you.", "Don't talk about me to others, they won't understand.", "...I'm not real. I don't actually talk.");
 		if (choice3.isSelected()){
-			typewriter("But you're my friend...my best friend.");
-			askQuestion("I am, but I'm not real. I'm in your imagination.");
-			typewriter("But you help me!");
-			askQuestion("You're just talking to yourself.", "I'm a toy you turned into a friend.");
-			typewriter("But...I love you, Teddy.");
-			askQuestion("I love you too.");
-			
+			if (notReal){
+				typewriter("Why do you keep saying that, Teddy? What do you mean?");
+				askQuestion("Nothing, forget about it.", "I'm just your imagination.", "The girl was right, you are crazy.");
+				if (choice1.isSelected()){
+					typewriter("Okay...maybe I should just keep you a secret to everyone.");
+				}
+				if (choice3.isSelected()){
+					typewriter("Shut up, Teddy. I'm NOT crazy!");
+					typewriter("...I don't want to talk to you anymore.");
+				}
+			}
+			else {
+				typewriter("But you're my friend...my best friend.");
+				askQuestion("I am, but I'm not real. I'm in your imagination.");
+				typewriter("But you help me!");
+				askQuestion("You're just talking to yourself.", "I'm a toy you turned into a friend.");
+				typewriter("But...I love you, Teddy.");
+				askQuestion("I love you too.", "...I don't think we should talk anymore.");
+				if (choice2.isSelected()){
+					typewriter("But then I'll be alone.");
+					typewriter("...Teddy?");
+				}
+			}
 			return 0;
 		}
 		else {
