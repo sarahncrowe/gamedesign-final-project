@@ -25,6 +25,8 @@ public class gameWindow extends JFrame implements ActionListener {
 	private static boolean pause;
 	private static boolean isQuestion = false;
 	
+	//choice 1 through 4 are pretty obvs, unselect is the hidden
+	//button that is selected at the start of each new choice.
 	private static JRadioButton choice1 = new JRadioButton();
 	private static JRadioButton choice2 = new JRadioButton();
 	private static JRadioButton choice3 = new JRadioButton();
